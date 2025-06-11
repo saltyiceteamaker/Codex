@@ -1,0 +1,52 @@
+#!/usr/bin/env python3
+"""Determine if a number is prime and explain why."""
+import sys
+
+
+def prime_factors(n: int) -> list[int]:
+    """Return the list of unique prime factors of ``n``."""
+    factors: list[int] = []
+    d = 2
+    while d * d <= n:
+        if n % d == 0:
+            factors.append(d)
+            while n % d == 0:
+                n //= d
+        d += 1
+    if n > 1:
+        factors.append(n)
+    return factors
+
+
+def is_prime(n: int) -> bool:
+    """Return ``True`` if ``n`` is a prime number."""
+    return len(prime_factors(abs(n))) == 1 and abs(n) >= 2
+
+
+def main():
+    if len(sys.argv) != 2:
+        print("Usage: Primenumbers2 <number>")
+        return
+    try:
+        num = int(sys.argv[1])
+    except ValueError:
+        print("Please provide an integer.")
+        return
+
+    if num <= 1:
+        print(f"{num} is not prime because it is less than 2")
+        return
+
+    factors = prime_factors(abs(num))
+    if len(factors) == 1 and factors[0] == abs(num):
+        print(f"{num} is prime")
+    else:
+        if len(factors) == 1:
+            reason = str(factors[0])
+        else:
+            reason = ", ".join(map(str, factors[:-1])) + " and " + str(factors[-1])
+        print(f"{num} is not prime because it is divisible by {reason}")
+
+
+if __name__ == "__main__":
+    main()
