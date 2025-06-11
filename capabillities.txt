@@ -1,0 +1,6 @@
+OpenAI's Codex can:
+- Generate code from natural language instructions.
+- Explain code and provide documentation.
+- Assist with debugging and testing.
+- Perform data analysis tasks.
+- Automate repetitive coding activities.
